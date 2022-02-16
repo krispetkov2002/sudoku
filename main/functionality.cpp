@@ -1,3 +1,17 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2021/2022
+*
+* @author Kristiyan Petkov
+* @idnumber 1MI0600016
+* @compiler VC
+*
+* Declarate functions for full functionality in the game
+*
+*/
 #include <iostream>
 #include "functionality.h"
 #include "messages.h"
@@ -49,7 +63,7 @@ void print_Board(int board[9][9], int n) {
     }
 }
 
-void stepFill_Board(int playerBoard[9][9], int defaultBoard[9][9], int original_b[9][9], int n) {
+void loading_Game(int playerBoard[9][9], int defaultBoard[9][9], int original_b[9][9], int n) {
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             playerBoard[i][j] = original_b[i][j];
@@ -61,15 +75,15 @@ void stepFill_Board(int playerBoard[9][9], int defaultBoard[9][9], int original_
 void fill_Board(int playerBoard[9][9], int defaultBoard[9][9], int level, int easy_Board[9][9], int medium_Board[9][9], int hard_Board[9][9], int n) {
     if (level == 1) {
         easy();
-        stepFill_Board(playerBoard, defaultBoard, easy_Board, n);
+        loading_Game(playerBoard, defaultBoard, easy_Board, n);
     }
     else if (level == 2) {
         medium();
-        stepFill_Board(playerBoard, defaultBoard, medium_Board, n);
+        loading_Game(playerBoard, defaultBoard, medium_Board, n);
     }
     else if (level == 3) {
         hard();
-        stepFill_Board(playerBoard, defaultBoard, hard_Board, n);
+        loading_Game(playerBoard, defaultBoard, hard_Board, n);
     }
 }
 
@@ -83,14 +97,18 @@ bool validating_Step(int x, int y, int num) {
     return val;
 }
 
-bool clear_Box(int defaultBoard[9][9], int x, int y) {
+void cleaning_Board(int playerBoard[9][9], int defaultBoard[9][9], int x, int y) {
     if (defaultBoard[x][y] == 0) {
-        return true;
+        playerBoard[x][y] = 0;
     }
-    else {
+}
+
+bool player_Permision(int defaultBoard[9][9], int x, int y) {
+    if (defaultBoard[x][y] != 0) {
         problem_DefaultBoard();
         return false;
     }
+    return true;
 }
 
 bool check_Column(int playerBoard[9][9], int defaultBoard[9][9], int x, int y, int num, int n) {
@@ -125,14 +143,14 @@ bool check_Row(int playerBoard[9][9], int defaultBoard[9][9], int x, int y, int 
     return false;
 }
 
-bool check_LittleSquare(int playerBoard[9][9], int defaultBoard[9][9], int x, int y, int num, int index1, int index2) {
+bool check_Block(int playerBoard[9][9], int defaultBoard[9][9], int x, int y, int num, int index1, int index2) {
     bool value = true;
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (playerBoard[i + x][j + y] == num) {
                 value = false;
-                problem_LittleSquare();
+                problem_Block();
             }
         }
     }

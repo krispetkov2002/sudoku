@@ -1,3 +1,17 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2021/2022
+*
+* @author Kristiyan Petkov
+* @idnumber 1MI0600016
+* @compiler VC
+*
+* Definition functions for printing messages in console
+*
+*/
 #include <iostream>
 using namespace std;
 
@@ -30,8 +44,8 @@ void problem_Row() {
 	cout << "The number is already available in this row.\n";
 }
 
-void problem_LittleSquare() {
-	cout << "The number is already available in this little square.\n";
+void problem_Block() {
+	cout << "The number is already available in this block.\n";
 }
 
 void problem_DefaultBoard() {
